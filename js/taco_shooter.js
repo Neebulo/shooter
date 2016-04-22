@@ -32,6 +32,28 @@ $(document).ready(function(){
 	};
 	makeTacos();
 
+  $(window).mousemove(function(){
+  var e = window.event;
+  var posX = (e.clientX) - 50;
+  var posY = (e.clientY);
+
+  //Make the ship move with the movement of the mouse
+  $(movingShip).css({
+    left: posX,
+  });
+
+  //Stops the shooting ship from going offscreen on left and right sides.
+  if(parseInt(movingShip[0].style.left) < 0){
+    $(movingShip).css({
+      left: 0
+    })
+  } else if(parseInt(movingShip[0].style.left) >= (window.innerWidth - 100)){
+    $(movingShip).css({
+      left: (window.innerWidth - 100) + 'px'
+    })
+  }
+});
+
 // animateTacos function
   window.onload = function animateTacos(){
   		//Animates the tacos.

@@ -69,6 +69,11 @@ $(document).ready(function(){
 	 	$(newLaser).css('left', newPosX);
 	 	$('#body').append(newLaser);
 
+    //Add class to the laser so it moves upwards.
+	 	setTimeout(function () {
+		 	$(newLaser).addClass('active');
+		}, 100);
+
     });
 
 // animateTacos function

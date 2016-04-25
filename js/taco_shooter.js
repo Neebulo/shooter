@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var score = $('#score').html(counter);
 
   //Sound
-	var crunchSound = new Audio("https://www.wavsource.com/snds_2016-03-13_7646817315637486/sfx/can_pop.wav");
+	var crunchSound = new Audio("http://www.pacdv.com/sounds/domestic_sound_effects/wine-glass-clink-2.wav");
 
 // makeTacos function
   var makeTacos = function () {
@@ -74,7 +74,44 @@ $(document).ready(function(){
 		 	$(newLaser).addClass('active');
 		}, 100);
 
+    //This function runs only if a taco is hit.
+	 	for(i = 0; i <= 7; i++){
+	 		if (hitsTaco(i, newPosX)) {
+	 			setTimeout(function () {
+	 				//Hide the taco that's just been shot.
+		 			$($('.dancingTacos')[i]).hide();
+		 			crunchSound.play();
+		 			//Increment the score by 1 every time a taco dies.
+		 			counter++;
+		 			$('#score').html(counter);
+		 		}, 200);
+		 		/*As below loop will return true or false as soon as the laser is shot,
+		 		and not when the laser actually touches the taco, play the sound a bit
+		 		after the laser is shot to make it more real.*/
+	 			break;
+	 		}
+	 	}
+
     });
+
+    //Function that checks if a cat is hit or not.
+	//laserLeft refers to newPosX
+	var hitsTaco = function (i, laserLeft) {
+		var $taco = $('.dancingTacos')[i];
+		var tacoLeft = $taco.offsetLeft; //Left position of the taco
+		var tacoRight = tacoLeft + $taco.offsetWidth;
+
+		// if ($taco.is(':hidden')) {
+		// 	return false; // Already dead, no need to do anything.
+		// }
+		if (laserLeft >= tacoLeft && laserLeft <= tacoRight) {
+			return true; //If laser is shot between the left and right coordinates of the taco, execute the code in the for loop above.
+		}
+
+
+	}
+
+
 
 // animateTacos function
   window.onload = function animateTacos(){

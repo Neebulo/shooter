@@ -32,6 +32,7 @@ $(document).ready(function(){
 	};
 	makeTacos();
 
+//**** SHIP FUNCTIONS ****
   $(window).mousemove(function(){
   var e = window.event;
   var posX = (e.clientX) - 50;
@@ -53,6 +54,22 @@ $(document).ready(function(){
     })
   }
 });
+
+//**** LASER FUNCTIONS ****
+
+//Laser starts when the user clicks anywhere on the window.
+	$(window).click(function(){
+	 	var e = window.event;
+	 	var newPosX = (e.clientX);
+	 	var newPosY = e.clientY;
+
+    //Create a new laser everytime the user clicks on ship.
+	 	var newLaser = document.createElement('div')
+	 	newLaser.id = "newLaser";
+	 	$(newLaser).css('left', newPosX);
+	 	$('#body').append(newLaser);
+
+    });
 
 // animateTacos function
   window.onload = function animateTacos(){
